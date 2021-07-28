@@ -4,7 +4,7 @@ using System.Linq;
 namespace TicTacToe.Core
 {
     /// <summary>
-    /// Represents a TicTacToe board.
+    /// Represents a tic-tac-toe board.
     /// </summary>
     public class Board
     {
