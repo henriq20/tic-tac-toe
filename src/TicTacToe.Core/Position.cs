@@ -28,16 +28,6 @@ namespace TicTacToe.Core
             Column = column;
         }
 
-        public static bool operator ==(Position left, Position right)
-        {
-            return left.Row == right.Row && left.Column == right.Column;
-        }
-
-        public static bool operator !=(Position left, Position right)
-        {
-            return left.Row != right.Row || left.Column != right.Column;
-        }
-        
         public override bool Equals(object obj)
         {
             var otherPosition = obj as Position?;
@@ -58,6 +48,16 @@ namespace TicTacToe.Core
         public override string ToString()
         {
             return string.Concat(Column, Row);
+        }
+        
+        public static bool operator ==(Position left, Position right)
+        {
+            return left.Row == right.Row && left.Column == right.Column;
+        }
+
+        public static bool operator !=(Position left, Position right)
+        {
+            return left.Row != right.Row || left.Column != right.Column;
         }
     }
 }
