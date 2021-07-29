@@ -5,4 +5,11 @@ namespace TicTacToe.Core
         Cross,
         Circle
     }
+
+    public enum TicTacToeMatchResult
+    {
+        Tie,
+        CrossWin,
+        CircleWin
+    }
 }
