@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace TicTacToe.Core
 {
@@ -41,6 +42,18 @@ namespace TicTacToe.Core
             squares = new Square[Length][];
 
             InitializeSquares();
+        }
+
+        /// <summary>
+        ///Gets all the positions where their corresponding square is empty.
+        /// </summary>
+        /// <returns>An array with all the available positions.</returns>
+        public Position[] GetAvailableMoves()
+        {
+            return squares.SelectMany(s => s)
+                          .Where(s => s.IsEmpty)
+                          .Select(s => s.Position)
+                          .ToArray();
         }
 
         /// <summary>
