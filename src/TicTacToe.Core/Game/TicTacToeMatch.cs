@@ -39,10 +39,17 @@ namespace TicTacToe.Core.Game
             if (Board[target.ToString()].IsEmpty)
             {
                 Board[target.ToString()].Mark = GetCurrentPlayer().Mark;
-                ChangeTurn();
                 Moves++;
+
+                if (IsFinished())
+                {
+                    UpdateScore();
+                }
+
+                ChangeTurn();
             }
         }
+
 
         /// <summary>
         /// Gets the result of this match.
@@ -95,6 +102,30 @@ namespace TicTacToe.Core.Game
             }
 
             return Engine.IsWin(MarkType.Cross) || Engine.IsWin(MarkType.Circle) || Engine.IsTie();
+        }
+
+        private void UpdateScore()
+        {
+            switch (GetResult())
+            {
+                case TicTacToeMatchResult.Tie:
+                    Cross.Score.Ties++;
+                    Circle.Score.Ties++;
+                    break;
+                
+                case TicTacToeMatchResult.CrossWin:
+                    Cross.Score.Wins++;
+                    Circle.Score.Losses++;
+                    break;
+
+                case TicTacToeMatchResult.CircleWin:
+                    Circle.Score.Wins++;
+                    Cross.Score.Losses++;
+                    break;
+
+                default:
+                    return;
+            }      
         }
     }
 }
