@@ -24,6 +24,11 @@ namespace TicTacToe.Demo.ConsoleApp
             Console.ResetColor();
         }
 
+        public static void WriteLine()
+        {
+            Console.WriteLine();
+        }
+
         public static void WriteLine(object value)
         {
             Console.WriteLine(value);
