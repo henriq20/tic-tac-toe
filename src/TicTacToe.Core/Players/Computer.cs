@@ -30,7 +30,7 @@ namespace TicTacToe.Core.Players
 
         public Position GetMove(Board board)
         {
-            var ai = new AI(board, Mark, Mark == MarkType.Cross ? MarkType.Circle : MarkType.Cross);
+            var ai = new AI(board, Mark, AI.GetOpponentFor(Mark));
 
             return Difficulty switch
             {

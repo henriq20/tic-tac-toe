@@ -59,8 +59,8 @@ namespace TicTacToe.Core
 
             var scores = Board.GetAvailableMoves().Select(target =>
             {
-                Board[target.ToString()].Mark = Player;
-                int score = Minimax(Opponent);
+                Board[target.ToString()].Mark = currentPlayer;
+                int score = Minimax(GetOpponentFor(currentPlayer));
                 Board[target.ToString()].Mark = null;
 
                 return score;
@@ -69,9 +69,9 @@ namespace TicTacToe.Core
             return currentPlayer == Player ? scores.Max() : scores.Min();
         }
 
-        private MarkType GetOpponentFor(MarkType mark)
+        public static MarkType GetOpponentFor(MarkType mark)
         {
-            return mark == MarkType.Cross ? MarkType.Circle : MarkType.Cross;
+            return mark ^ MarkType.Circle;
         }
     }
 }
