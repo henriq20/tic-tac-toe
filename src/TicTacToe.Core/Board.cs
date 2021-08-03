@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace TicTacToe.Core
 {
@@ -45,7 +44,7 @@ namespace TicTacToe.Core
         }
 
         /// <summary>
-        ///Gets all the positions where their corresponding square is empty.
+        /// Gets all the positions where their corresponding square is empty.
         /// </summary>
         /// <returns>An array with all the available positions.</returns>
         public Position[] GetAvailableMoves()
