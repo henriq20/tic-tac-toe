@@ -12,4 +12,11 @@ namespace TicTacToe.Core
         CrossWin,
         CircleWin
     }
+
+    public enum Difficulty
+    {
+        Easy,
+        Medium,
+        Impossible
+    }
 }

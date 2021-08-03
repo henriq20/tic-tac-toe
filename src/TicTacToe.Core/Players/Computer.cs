@@ -1,20 +1,20 @@
-using System;
-
 namespace TicTacToe.Core.Players
 {
     public class Computer : IPlayer
     {
         public Score Score { get; init; }
         public MarkType Mark { get; set; }
+        public Difficulty Difficulty { get; init; }
         
         /// <summary>
         /// Initializes a new instance of the <see cref="Computer"/> class with the specified mark.
         /// </summary>
         /// <param name="mark">The mark that this player will use in a game.</param>
-        public Computer(MarkType mark)
+        public Computer(MarkType mark, Difficulty difficulty)
         {
             Mark = mark;
             Score = new Score();
+            Difficulty = difficulty;
         }
 
         /// <summary>
@@ -22,17 +22,20 @@ namespace TicTacToe.Core.Players
         /// </summary>
         /// <param name="mark">The mark that this player will use in a game.</param>
         /// <param name="score">The score of this player.</param>
-        public Computer(MarkType mark, Score score)
-            : this(mark)
+        public Computer(MarkType mark, Score score, Difficulty difficulty)
+            : this(mark, difficulty)
         {
             Score = score;
         }
 
-        public static Position GetMove(Board board)
+        public Position GetMove(Board board)
         {
-            var availableMoves = board.GetAvailableMoves();
+            var ai = new AI(board, Mark, Mark == MarkType.Cross ? MarkType.Circle : MarkType.Cross);
 
-            return availableMoves[new Random().Next(0, availableMoves.Length)];
+            return Difficulty switch
+            {
+                Difficulty.Impossible => ai.FindBestMove()
+            };
         }
     }
 }
