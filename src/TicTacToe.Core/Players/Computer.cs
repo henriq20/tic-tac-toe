@@ -34,6 +34,8 @@ namespace TicTacToe.Core.Players
 
             return Difficulty switch
             {
+                Difficulty.Easy => ai.FindRandomMove(),
+                Difficulty.Medium => ai.FindRandomMoveOrBestMove(),
                 Difficulty.Impossible => ai.FindBestMove()
             };
         }

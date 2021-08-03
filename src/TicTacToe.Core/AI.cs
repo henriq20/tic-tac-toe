@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using TicTacToe.Core.Game;
 
@@ -15,7 +16,24 @@ namespace TicTacToe.Core
             Player = player;
             Opponent = opponent;
         }
-        
+
+        public Position FindRandomMove()
+        {
+            var availableMoves = Board.GetAvailableMoves();    
+            return availableMoves[new Random().Next(availableMoves.Length)];
+        }
+
+        public Position FindRandomMoveOrBestMove()
+        {
+            var randomNumber = new Random().Next(0, 2);
+
+            return randomNumber switch
+            {
+                0 => FindRandomMove(),
+                _ => FindBestMove()
+            };
+        }
+
         public Position FindBestMove()
         {
             return Board.GetAvailableMoves().OrderByDescending(target =>
