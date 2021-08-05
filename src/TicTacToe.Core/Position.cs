@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 
 namespace TicTacToe.Core
 {
@@ -26,6 +27,37 @@ namespace TicTacToe.Core
         {
             Row = row;
             Column = column;
+        }
+
+        /// <summary>
+        /// Converts the specified string into a <see cref="Position"/> object.
+        /// </summary>
+        /// <param name="position">The string to be converted.</param>
+        /// <returns>A <see cref="Position"/> object with the specified row and column in the <paramref name="position"/> string.</returns>
+        /// <exception cref="FormatException"/>
+        public static Position FromString(string position)
+        {
+            if (IsValid(position))
+            {
+                return new Position(position[0], (int)char.GetNumericValue(position[1]));
+            }
+
+            throw new FormatException("The specified position is not a valid position.");
+        }
+
+        /// <summary>
+        /// Indicates whether the <paramref name="position"/> is valid.
+        /// <para>
+        /// A valid position must be only 2 characters long.
+        /// The first character must be a letter between 'a' and 'i'.
+        /// The second character must be a number between 1 and 9.
+        /// </para>
+        /// </summary>
+        /// <param name="position">The position to be evaluated.</param>
+        /// <returns><see langword="true"/> if the <paramref name="position"/> is valid; otherwise, <see langword="false"/>.</returns>
+        public static bool IsValid(string position)
+        {
+            return Regex.IsMatch(position, "^[a-iA-I]{1}[1-9]{1}$");
         }
 
         public override bool Equals(object obj)
